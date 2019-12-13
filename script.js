@@ -82,23 +82,31 @@ $(document).ready(function() {
         method: "GET"
       }).then(function(response) {
   
-        console.log(queryURL);
         console.log(response);
+        var date1 = response.list[7].dt_txt;
+        var date2 = response.list[14].dt_txt;
+        var date3 = response.list[22].dt_txt;
+        var date4 = response.list[30].dt_txt
+        var date5 = response.list[38].dt_txt
 
+        var noTime1 = date1.split(" ");
+        var noTime2 = date2.split(" ");
+        var noTime3 = date3.split(" ");
+        var noTime4 = date4.split(" ");
+        var noTime5 = date5.split(" ");
+        
+        
+      
         // day 1 - date
-        $("#date1").text(response.list[7].dt_txt);
+        $("#date1").text(noTime1[0])
         // day 2 - date
-        
+        $("#date2").text(noTime2[0]);
         // day 3 - date
-        
+        $("#date3").text(noTime3[0]);
         // day 4  - date
-
-
+        $("#date4").text(noTime4[0]);
         // day 5 - date
-
-    //   $(".wind").text("Wind Speed: " + response.wind.speed);
-    //   $(".humidity").text("Humidity: " + response.main.humidity);
-    //   $(".temp").text("Temperature (F) " + response.main.temp);
+        $("#date5").text(noTime5[0]);
 
       })
     })
