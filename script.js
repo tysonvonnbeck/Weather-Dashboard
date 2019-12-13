@@ -20,8 +20,8 @@ $(document).ready(function() {
     }).then(function(response) {
         // $("#search").text(JSON.stringify(response));
 
-      console.log(queryURL);
-      console.log(response);
+      // console.log(queryURL);
+      // console.log(response);
 
       $(".city").html("<h1>" + response.name + "</h1>" + "<h5>" + moment().format('MMMM Do YYYY') + "</h5>");
       $(".wind").text("Wind Speed: " + response.wind.speed);
@@ -86,11 +86,15 @@ $(document).ready(function() {
         console.log(response);
 
         // day 1 - date
-        $("one").html(response.list[0].weather[0]);
+        $("#date1").text(response.list[7].dt_txt);
         // day 2 - date
-
+        
         // day 3 - date
+        
+        // day 4  - date
 
+
+        // day 5 - date
 
     //   $(".wind").text("Wind Speed: " + response.wind.speed);
     //   $(".humidity").text("Humidity: " + response.main.humidity);

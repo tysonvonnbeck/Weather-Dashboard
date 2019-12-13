@@ -59,6 +59,7 @@ body, html {
     flex: 1;
     margin: 5px;
     height: 100px;
+    background-color: lightblue;
 }
 
 .title {
