@@ -1,0 +1,68 @@
+* {
+    border: 1px solid black;
+}
+
+body, html {
+    height: 100%;
+  }
+
+  /* background image */
+  /* .bg { */
+    /* The image used */
+    /* background-image: url("/Assets/qQa5Pd7.jpg"); */
+  
+    /* Full height */
+    /* height: 100%; */
+  
+    /* Center and scale the image nicely */
+    /* background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  } */
+
+  .main {
+    width: 50%;
+    margin: 50px auto;
+}
+
+/* Bootstrap 4 text input with search icon */
+
+.has-search .form-control {
+    padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+}
+
+#current {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 182px;
+    
+}   
+
+/* columns in 5ths */
+.tyson_row {
+    display: flex;
+}
+.tyson_col {
+    flex: 1;
+    margin: 5px;
+    height: 100px;
+}
+
+.title {
+    color: white;
+    background-color: black;
+    text-align: center;
+}
