@@ -4,23 +4,14 @@
 
 body, html {
     height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
 
-  /* background image */
-  /* .bg { */
-    /* The image used */
-    /* background-image: url("/Assets/qQa5Pd7.jpg"); */
-  
-    /* Full height */
-    /* height: 100%; */
-  
-    /* Center and scale the image nicely */
-    /* background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-  } */
+.bg {
+    background-color:whitesmoke;
+}
 
-  .main {
+.main {
     width: 50%;
     margin: 50px auto;
 }
@@ -60,6 +51,7 @@ body, html {
     margin: 5px;
     height: 100px;
     background-color: lightblue;
+    height: max-content;
 }
 
 .title {
@@ -67,3 +59,34 @@ body, html {
     background-color: black;
     text-align: center;
 }
+
+button {
+    border: 1px solid black;
+    /* width: fit-content; */
+    text-align: left;
+   
+
+}
+
+#results{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+
+/* .uv-index {
+    background-color: red;
+    color: white;
+    width: fit-content;
+} */
+
+h4 {
+    width: fit-content;
+}
+
+/* #one {
+   display: flex; 
+   justify-content: space-between;
+
+} */
