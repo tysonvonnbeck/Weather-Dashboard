@@ -1,6 +1,6 @@
-* {
+/* * {
     border: 1px solid black;
-}
+} */
 
 body, html {
     height: 100%;
@@ -39,6 +39,9 @@ body, html {
     flex-direction: column;
     width: 100%;
     min-height: 182px;
+    border: 2px solid black;
+    padding: 10px;
+    background-color: linen;
     
 }   
 
@@ -74,19 +77,5 @@ button {
     flex-wrap: nowrap;
 }
 
-
-/* .uv-index {
-    background-color: red;
-    color: white;
-    width: fit-content;
-} */
-
 h4 {
     width: fit-content;
-}
-
-/* #one {
-   display: flex; 
-   justify-content: space-between;
-
-} */

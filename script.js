@@ -1,10 +1,9 @@
 var uvIndex = $(".uv-index");
+var searchHist = [];
 
 $(document).ready(function () {
   $("#search").on("click", function () {
-    var inputValue = $("#search")
-      .parent()
-      .prev()
+    var inputValue = $("#searched")
       .val();
     event.preventDefault();
 
@@ -22,9 +21,6 @@ $(document).ready(function () {
       // clear search 
       $('#searched').val("")
 
-      // console.log(queryURL);
-      // console.log(response);
-
       $(".city").html("<h1>" + response.name + "</h1>" + "<h5>" + moment().format('MMMM Do YYYY') + "</h5>");
       $(".wind").text("Wind Speed: " + response.wind.speed);
       $(".humidity").text("Humidity: " + response.main.humidity);
@@ -40,10 +36,6 @@ $(document).ready(function () {
       uvIn(APIKey, lat, lon)
 
 
-      var searches = $('#search').map(function () {
-        return $(this).val();
-      }).toArray();
-
     });
 
     // UV Index
@@ -56,100 +48,105 @@ $(document).ready(function () {
         .then(function (response) {
           uvIndex.text(" UV index : " + response.value)
         });
-
     };
   })
 });
 
+
 //Searched Cities
 $('#search').on('click', function (event) {
   event.preventDefault();
-  var searchedCities = $(".lookup").val();
+  var searchedCities = $(".lookup").val().trim();
+  searchHist.push(searchedCities)
+  // if(searchHist.length>=6){
+  //   searchHist.shift()
+  // }
+saveToLocalStorage(searchHist)
+
+
 
   //create button
-  var btn = document.createElement("BUTTON");
-  btn.innerHTML = searchedCities;
-  $("#results").append(btn);
+  // var btn = document.createElement("button");
+  // btn.innerHTML = searchedCities;
+  // $("#results").append(btn)
 
-  // local storage
-  localStorage.setItem(
-    "searched",
-    JSON.stringify(searchedCities)
-  )
+})
 
-  //display history
-  // function getHistory() {
-  //   var history = JSON.parse(localStorage.getItem("searched"));
-  //   var btn = document.createElement("BUTTON");
-  //   btn.innerHTML = history;
-  //   $("#results").append(btn);
-  // }
+// local storage
+function saveToLocalStorage (searchHist) {
+    localStorage.setItem("searched", JSON.stringify(searchHist))};
+if (localStorage.getItem("searched") !== null) {
+  localResult = JSON.parse(localStorage.getItem("searched"))
+  searchHist = localResult
+}
 
+for (let i = 0; i < searchHist.length; i++) {
+  var cityBtn = $("<div>");
+  cityBtn.addClass("list-group-item list-group-item-action cityBtn");
+  cityBtn.attr('id', 'search')
+  cityBtn.text(searchHist[i]);
+  $("#results").append(cityBtn);
+}
 
-  //5 Day Forecast
-  $(document).ready(function () {
-    $("#search").on("click", function () {
-      var inputValue = $("#search")
-        .parent()
-        .prev()
-        .val();
-      event.preventDefault();
+$(cityBtn)
 
-      var APIKey = "e7196856e41701aad2ab6aa22965b557";
-      var queryURL =
-        "https://api.openweathermap.org/data/2.5/forecast?q=" +
-        inputValue +
-        "&units=imperial&appid=" +
-        APIKey;
+//5 Day Forecast
+$(document).ready(function () {
+  $("#search").on("click", function () {
+    var inputValue = $("#searched")
+      .val();
+    event.preventDefault();
 
-      $.ajax({
-        url: queryURL,
-        method: "GET"
-      }).then(function (response) {
-        // DAY 1
-        var date1 = response.list[7].dt_txt;
-        date1 = moment.parseZone(date1).format('MMM Do');
-        $("#date1").text(date1)
-        $("#weather1").text(response.list[7].weather[0].main)
-        $("#temp1").text("temp: " + response.list[7].main.temp)
-        $("#hum1").text("humidity: " + response.list[7].main.humidity)
+    var APIKey = "e7196856e41701aad2ab6aa22965b557";
+    var queryURL =
+      "https://api.openweathermap.org/data/2.5/forecast?q=" +
+      inputValue +
+      "&units=imperial&appid=" +
+      APIKey;
 
-        // DAY 2
-        var date2 = response.list[14].dt_txt;
-        date2 = moment.parseZone(date2).format('MMM Do');
-        $("#date2").text(date2);
-        $("#weather2").text(response.list[14].weather[0].main)
-        $("#temp2").text("temp: " + response.list[14].main.temp)
-        $("#hum2").text("humidity: " + response.list[14].main.humidity)
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    }).then(function (response) {
+      // DAY 1
+      var date1 = response.list[7].dt_txt;
+      date1 = moment.parseZone(date1).format('MMM Do');
+      $("#date1").text(date1)
+      $("#weather1").text(response.list[7].weather[0].main)
+      $("#temp1").text("temp: " + response.list[7].main.temp)
+      $("#hum1").text("humidity: " + response.list[7].main.humidity)
 
-        // DAY 3
-        var date3 = response.list[22].dt_txt;
-        date3 = moment.parseZone(date3).format('MMM Do');
-        $("#date3").text(date3);
-        $("#weather3").text(response.list[22].weather[0].main)
-        $("#temp3").text("temp: " + response.list[22].main.temp)
-        $("#hum3").text("humidity: " + response.list[22].main.humidity)
+      // DAY 2
+      var date2 = response.list[14].dt_txt;
+      date2 = moment.parseZone(date2).format('MMM Do');
+      $("#date2").text(date2);
+      $("#weather2").text(response.list[14].weather[0].main)
+      $("#temp2").text("temp: " + response.list[14].main.temp)
+      $("#hum2").text("humidity: " + response.list[14].main.humidity)
 
-        // DAY 4
-        var date4 = response.list[30].dt_txt
-        date4 = moment.parseZone(date4).format('MMM Do');
-        $("#date4").text(date4);
-        $("#weather4").text(response.list[30].weather[0].main)
-        $("#temp4").text("temp: " + response.list[30].main.temp)
-        $("#hum4").text("humidity: " + response.list[30].main.humidity)
+      // DAY 3
+      var date3 = response.list[22].dt_txt;
+      date3 = moment.parseZone(date3).format('MMM Do');
+      $("#date3").text(date3);
+      $("#weather3").text(response.list[22].weather[0].main)
+      $("#temp3").text("temp: " + response.list[22].main.temp)
+      $("#hum3").text("humidity: " + response.list[22].main.humidity)
 
-        // DAY 5
-        var date5 = response.list[38].dt_txt
-        date5 = moment.parseZone(date5).format('MMM Do');
-        $("#date5").text(date5);
-        $("#weather5").text(response.list[38].weather[0].main)
-        $("#temp5").text("temp: " + response.list[38].main.temp)
-        $("#hum5").text("humidity: " + response.list[38].main.humidity)
+      // DAY 4
+      var date4 = response.list[30].dt_txt
+      date4 = moment.parseZone(date4).format('MMM Do');
+      $("#date4").text(date4);
+      $("#weather4").text(response.list[30].weather[0].main)
+      $("#temp4").text("temp: " + response.list[30].main.temp)
+      $("#hum4").text("humidity: " + response.list[30].main.humidity)
 
-        console.log(response);
-
-
-      })
+      // DAY 5
+      var date5 = response.list[38].dt_txt
+      date5 = moment.parseZone(date5).format('MMM Do');
+      $("#date5").text(date5);
+      $("#weather5").text(response.list[38].weather[0].main)
+      $("#temp5").text("temp: " + response.list[38].main.temp)
+      $("#hum5").text("humidity: " + response.list[38].main.humidity)
     })
   })
 })
